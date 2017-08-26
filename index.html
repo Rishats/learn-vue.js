@@ -6,22 +6,36 @@
 </head>
 <body>
     <div id="root" >
-        <input type="text" id="input" v-model="message">
+        <ul>
+            <li v-for="name in names" v-text="name"></li>
+        </ul>
 
-        <p>The value of the input is: {{ message }}</p>
+        <input id="input" type="text">
+        <button id="button">Add name</button>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js"></script>
 
-    <script type="text/javascript">
+    <script>
         Vue.config.devtools = true; // Install in to Google Chrome Vue JS Devtools.
-        
-        new Vue({
+
+        var app = new Vue({
             el: '#root',
             data: {
-                message: "Hello World"
+                names: ['Joe', 'Mary', 'Jane', 'Jack']
+            },
+
+            mounted() {
+                document.querySelector('#button').addEventListener('click', () => {
+                    var name = document.querySelector('#input');
+
+                    app.names.push(name.value);
+
+                    name.value = '';
+                });
             }
-        })
+
+        });
     </script>
 </body>
 </html>
